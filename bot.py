@@ -1,4 +1,6 @@
-#all in one bot(beta). made by redknight
+#all in one bot(beta). made by redknight:-
+
+#here u need to add the import items:-
 
 import discord
 from discord import Game
@@ -17,10 +19,12 @@ client=discord.Client(intents=intents)
 client=commands.Bot(command_prefix='-')
 client.remove_command("help")
 
+#write event commands here:-
+
 @client.event
 async def on_ready():
-    await client.change_presence(status=discord.Status.idle,activity=discord.Game('Python'))
-    print("the bot is ready[made by redknight]")
+	await client.change_presence(status=discord.Status.idle,activity=discord.Game('Python'))
+	print("the bot is ready[made by redknight]")
 
 @client.event
 async def on_member_join(member):
@@ -34,6 +38,8 @@ async def on_member_remove(member):
     embed.set_footer(text=f"made by redknight!") 
     msg=await client.send_message(discord.Object(id="814090184836120589"),embed=embed)   
     
+#write commands here:-
+
 @client.command(pass_context=True)
 async def help(ctx):
      await client.say("Use -cmd for commands :partying_face:")    
@@ -64,17 +70,17 @@ async def ban(ctx,member:discord.Member):
 
 @client.command()
 async def unban(ctx, *, member):
-    banned_users=await ctx.guild.bans()
-    member_name,member_discriminator=member.split('#')
+	banned_users=await ctx.guild.bans()
+	member_name,member_discriminator=member.split('#')
 
-    for ban_entry in banned_users:
-        user=ban_entry.user
+	for ban_entry in banned_users:
+		user=ban_entry.user
 
-        if (user.name,user.discriminator)==(member_name,member_discriminator):
-            await ctx.guild.unban(user)
-            await ctx.send(f'{user.mention} is **Unbanned**')
+		if (user.name,user.discriminator)==(member_name,member_discriminator):
+			await ctx.guild.unban(user)
+			await ctx.send(f'{user.mention} is **Unbanned**')
 
-            return
+			return
 
 @client.command()
 @commands.has_permissions(kick_members=True)
@@ -87,7 +93,7 @@ async def kick(ctx,member:discord.Member):
 
 @client.command()
 async def clear(ctx, amount=2):
-    await ctx.channel.purge(limit=amount)
+	await ctx.channel.purge(limit=amount)
 
 @client.command(pass_context=True)
 @commands.has_permissions(kick_members=True)
@@ -186,6 +192,8 @@ async def resume(ctx):
 @client.command()
 async def stop(ctx):
     voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-    voice.stop()        
+    voice.stop()   
+    
+#write ur bot token here:-
 
 client.run("YOUR TOKEN")
